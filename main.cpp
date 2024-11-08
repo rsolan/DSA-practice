@@ -24,12 +24,32 @@ void print(Node* head){
   }
 }
 
+int print_length(Node* head){
+  Node* temp = head;
+  int l=0;
+  while(temp!=NULL){
+    l++;
+    temp=temp->next;
+  }
+  return l;
+}
+
+void cal_tail(Node* head, Node* & tail ){
+  Node* temp = head;
+  while(temp->next!=NULL){
+    temp=temp->next;
+  }
+  tail=temp;
+  
+}
+
 
 int main() { 
   
-  std::cout << "Hello World!\n"; 
+  
 
-  Node a;
+  Node a; //static object
+  //dynamic obj :-
   Node* first = new Node(10);
   Node* sec = new Node(20);
   Node* third = new Node(30);
@@ -40,8 +60,10 @@ int main() {
   third->next=fourth;
 
   Node* head = first;
-  print(head);
+  Node* tail = first;
   
-
+  std::cout <<"\n"<< std::endl;
+  std::cout << "1. printing the ll \n" <<std::endl;
+  
 
 }
