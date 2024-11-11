@@ -1,69 +1,54 @@
 #include <iostream>
+#include <limits.h>
+#include <string.h>
+#include <vector>
 
 class Node{
 
   public:
     int data;
+    Node* prev;
     Node* next;
-
+  
     Node(){
-      this->next =NULL;
+      this->prev =NULL;
+      this->next =NULL;   
     }
+
     Node(int data){
       this->data=data;
+      this->prev =NULL;
       this->next=NULL;
     }
 
+
+  // check destructor called for delete
+    ~Node(){
+      std::cout<<"destructore called for this node: " << this->data <<std::endl;
+    }
+
 };
-
-void print(Node* head){
-  Node* temp = head;
-  while(temp!=NULL){
-    std::cout<<temp->data << " ";
-    temp=temp->next;
-  }
-}
-
-int print_length(Node* head){
-  Node* temp = head;
-  int l=0;
-  while(temp!=NULL){
-    l++;
-    temp=temp->next;
-  }
-  return l;
-}
-
-void cal_tail(Node* head, Node* & tail ){
-  Node* temp = head;
-  while(temp->next!=NULL){
-    temp=temp->next;
-  }
-  tail=temp;
-  
-}
 
 
 int main() { 
   
   
-
-  Node a; //static object
-  //dynamic obj :-
-  Node* first = new Node(10);
-  Node* sec = new Node(20);
-  Node* third = new Node(30);
-  Node* fourth = new Node(40);
-
-  first->next=sec;
-  sec->next=third;
-  third->next=fourth;
-
-  Node* head = first;
-  Node* tail = first;
+  
   
   std::cout <<"\n"<< std::endl;
   std::cout << "1. printing the ll \n" <<std::endl;
+ 
+
+
   
 
+  
 }
+
+
+/*
+OUTPUT - 
+
+
+  
+  */

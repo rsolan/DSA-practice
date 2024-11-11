@@ -1,0 +1,235 @@
+#include <iostream>
+#include <limits.h>
+#include <string.h>
+#include <vector>
+
+class Node{
+
+  public:
+    int data;
+    Node* prev;
+    Node* next;
+
+    Node(){
+      this->prev =NULL;
+      this->next =NULL;   
+    }
+
+    Node(int data){
+      this->data=data;
+      this->prev =NULL;
+      this->next=NULL;
+    }
+
+
+  // check destructor called for delete
+    ~Node(){
+      std::cout<<"destructore called for this node: " << this->data <<std::endl;
+    }
+
+};
+
+void print(Node* head){
+  Node* temp = head;
+  while(temp!=NULL){
+    std::cout<<temp->data << " ";
+    temp=temp->next;
+  }
+}
+
+int print_length(Node* head){
+  Node* temp = head;
+  int l=0;
+  while(temp!=NULL){
+    l++;
+    temp=temp->next;
+  }
+  return l;
+}
+
+void cal_tail(Node* head, Node* & tail ){
+  Node* temp = head;
+  while(temp->next!=NULL){
+    temp=temp->next;
+  }
+  tail=temp;
+
+}
+
+void insert_head(Node* &head,Node* &tail, int data){
+  if(head==NULL){
+    Node* newnode = new Node(data);
+    head = newnode;
+    tail = newnode;
+  }else{
+    Node* newnode = new Node(data);
+    newnode->next = head;
+    head->prev = newnode;
+    head = newnode;
+  }
+}
+
+
+void insert_tail(Node* &head,Node* &tail, int data){
+  if(head==NULL){
+    Node* newnode = new Node(data);
+    head = newnode;
+    tail = newnode;
+  }else{
+    Node* newnode = new Node(data);
+    tail->next = newnode;
+    newnode->prev = tail;
+    tail = newnode;
+  }
+}
+
+void insert_pos(Node* &head,Node* &tail, int data, int pos){
+  int length = print_length(head);
+  if(head ==NULL){
+    Node* newnode = new Node(data);
+    head = newnode;
+    tail = newnode;
+  }
+
+  if(pos <=1){
+    insert_head(head,tail,data);
+  }else if(pos >length){
+    insert_tail(head,tail,data);
+  }else{
+    Node* p = NULL;
+    Node* n = head;
+
+    while(pos!=1){
+      pos--;
+      p=n;
+      n=n->next;
+    }
+
+    Node* newnode = new Node(data);
+    p->next = newnode;
+    newnode->prev = p;
+    newnode->next = n;
+    n->prev = newnode;
+
+  }
+}
+
+void delete_doublyLL(Node* &head,Node* &tail, int pos){
+  int length = print_length(head);
+   if(head==NULL){
+     std::cout<< "cannot delete" <<std::endl;
+   }
+
+  if(head == tail){
+    //DELETE 1 NODE
+    Node*temp = head;
+    delete temp;
+
+    head= NULL;
+    tail = NULL;
+  }
+
+  if(pos == 1){
+    Node* temp = head;
+    head = head->next;
+    temp->next = NULL;
+    head->prev = NULL;
+    delete temp;
+
+  }else if(pos == length){
+    Node* temp = tail->prev;  //--- imp
+    temp->next = NULL;
+    tail->prev = NULL;
+    delete tail;
+    tail = temp;
+
+  }else{
+    Node* p= NULL;
+    Node* n = head;
+
+    while(pos!=1){
+      pos--;
+      p=n;
+      n=n->next;
+    }
+      // or use 3 pointers - x , y ,z ; z= y->next
+    Node* temp = n;
+    p->next = n->next;
+    n->next->prev = p;
+    temp->prev = NULL;
+    temp->next = NULL;
+    delete temp;
+
+
+  }
+
+}
+
+int main() { 
+
+  Node* first = new Node(10);
+  Node* head = first;
+  Node* tail = first;
+
+
+  std::cout <<"\n"<< std::endl;
+  std::cout << "1. printing the ll \n" <<std::endl;
+  print(head);
+
+
+
+
+  std::cout <<"\n"<< std::endl;
+  std::cout << "2. Insert the ll \n" <<std::endl;
+  insert_head(head,tail,5);
+  print(head);
+  std::cout <<"\n"<< std::endl;
+  insert_tail(head,tail,20);
+  insert_tail(head,tail,30);
+  insert_tail(head,tail,40);
+  print(head);
+  std::cout <<"\n"<< std::endl;
+  insert_pos(head,tail,25,4);
+  insert_pos(head,tail,250,40);
+  insert_pos(head,tail,2500,41);
+  print(head);
+  std::cout <<"\n"<< std::endl;
+
+
+  std::cout <<"\n"<< std::endl;
+  std::cout << "2. delete the ll \n" <<std::endl;
+    delete_doublyLL(head,tail,1);
+  print(head);
+  std::cout <<"\n"<< std::endl;
+    delete_doublyLL(head,tail,7);
+
+  print(head);
+  std::cout <<"\n"<< std::endl;
+    delete_doublyLL(head,tail,4);
+  print(head);
+  std::cout <<"\n"<< std::endl;
+
+
+}
+
+
+/*
+OUTPUT - 
+
+
+  std::cout <<"\n"<< std::endl;
+  std::cout << "2. delete the ll \n" <<std::endl;
+    delete_doublyLL(head,tail,5);
+  print(head);
+  std::cout <<"\n"<< std::endl;
+    delete_doublyLL(head,tail,20);
+    delete_doublyLL(head,tail,30);
+    delete_doublyLL(head,tail,40);
+  print(head);
+  std::cout <<"\n"<< std::endl;
+    delete_doublyLL(head,tail,25,4);
+  print(head);
+  std::cout <<"\n"<< std::endl;
+
+
+  */
