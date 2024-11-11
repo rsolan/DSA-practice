@@ -1,3 +1,52 @@
+
+// LL- 206, 876 , 234
+  // LL1 - 141, 142 , 25 , 83
+
+  -----------------------------------------
+  // 1. REMOVE loop in ll
+
+// class Solution {
+// public:
+//     ListNode *detectCycle(ListNode *head) {
+//         ListNode* slow = head;
+//         ListNode* fast = head;
+
+//         while(fast != NULL){
+//             fast = fast->next;
+//             if(fast != NULL){
+//                 fast = fast->next;
+//                 slow = slow->next;
+//             }
+//             if(slow == fast){
+//                 break;
+//             }
+//         }
+
+//         if(fast == NULL){
+//             return NULL;
+//             // reached null so no cycle
+//         }
+
+//         // return starting point of loop
+//         slow = head;
+//         while(slow != fast){
+//             slow = slow->next;
+//             fast = fast->next;
+//         }
+
+//         ListNode* startingpoint = slow;
+//         ListNode* temp = slow;
+//         while(temp->next != startingpoint){
+//             temp=temp->next;
+//         }
+//         // now temp at before sp - remove loop
+//         temp->next = NULL;
+//     }
+// };
+
+----------------------------
+2.
+
 #include <iostream>
 #include <limits.h>
 #include <string.h>
@@ -8,17 +57,17 @@ class Node{
   public:
     int data;
     Node* next;
-    
-  
+
+
     Node(){
       this->next =NULL;
-        
+
     }
 
     Node(int data){
       this->data=data;
       this->next =NULL;
-      
+
     }
 };
 Node* reverseList(Node* head) {
@@ -48,7 +97,7 @@ void addone(Node* &head){
 
   // 2. add
   int carry = 1;
-  
+
   Node* temp = head;
   while(temp->next != NULL){
     int ts = temp->data + carry;
@@ -70,7 +119,7 @@ void addone(Node* &head){
     carry = ts/10;
 
     temp->data = digit;
-    
+
 
     if(carry != 0){
       Node* newnode = new Node(carry);
@@ -80,12 +129,12 @@ void addone(Node* &head){
 
   // 3.reverse back
   head = reverseList(head);
-  
+
 }
 
 int main() { 
-  
-  
+
+
   Node* first = new Node(1);
   Node* sec = new Node(9);
   Node* third = new Node(9);
@@ -99,10 +148,10 @@ int main() {
   addone(head);
   print(head);
   std::cout <<"\n"<< std::endl;
- 
 
 
-  
+
+
 }
 
 
