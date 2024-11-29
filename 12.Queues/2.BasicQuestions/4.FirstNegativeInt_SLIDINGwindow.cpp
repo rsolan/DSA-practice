@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <deque>
 using namespace std;
@@ -52,8 +51,8 @@ int main() {
   // int size =  7;
   // int k = 3;
 
-  int arr[]= {-2,0,4,-1,-5,6};
-  int size =  6;
+  int arr[]= {-2,0,-1,2,-4};
+  int size =  5;
   int k = 3;
 
   
@@ -82,5 +81,13 @@ int arr[]= {-2,0,4,-1,-5,6};
 
   1.PRINT FIRST NEGATIVE ELEMENT WITHIN K WINDOW SIZE OF ARRAY
 -2 -1 -1 -1 
+===========================================================
+
+int arr[]= {-2,0,-1,2,-4};
+  int size =  5;
+  int k = 3;
+1.PRINT FIRST NEGATIVE ELEMENT WITHIN K WINDOW SIZE OF ARRAY
+-2 -1 -1 
+
 
 */
